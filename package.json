@@ -1,11 +1,13 @@
 {
   "name": "computer-graphics-assignment-2",
+  "homepage": "https://olegani4.github.io/cg-assignment-2",
   "private": true,
   "type": "module",
   "author": "olegani4",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "lil-gui": "^0.20.0",
     "three": "^0.170.0"
   },
@@ -15,6 +17,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   }
 }
