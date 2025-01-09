@@ -54,8 +54,8 @@ An interactive 3D scene viewer built with Three.js that allows users to manipula
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/3d-scene-viewer.git
-cd 3d-scene-viewer
+git clone https://github.com/olegani4/cg-assignment-2.git
+cd cg-assignment-2
 ```
 
 2. Install dependencies:
