@@ -63,6 +63,9 @@ scene.add(gridHelper);
 
 // GUI
 const gui = new GUI();
+const REPO_BASE = '/cg-assignment-2';
+console.log('REPO_BASE', REPO_BASE);
+
 const sceneControls = {
   backgroundColor: 0x2a2a2a,
   generalLightIntensity: 1.0,
@@ -71,32 +74,32 @@ const sceneControls = {
   sceneTexture: 'None',
   showSurface: true,
   addCat: async () => {
-    const cat = await loadModel('/models/cat.obj', 0.03);
+    const cat = await loadModel(`${REPO_BASE}/models/cat.obj`, 0.03);
     if (cat) {
       cat.position.set(Math.random() * 4 - 2, 0, Math.random() * 4 - 2);
       cat.rotation.x = -Math.PI / 2;
     }
   },
   addHuman: async () => {
-    const human = await loadModel('/models/human.obj', 0.2);
+    const human = await loadModel(`${REPO_BASE}/models/human.obj`, 0.2);
     if (human) human.position.set(Math.random() * 4 - 2, 0, Math.random() * 4 - 2);
   },
   addMale: async () => {
-    const male = await loadModel('/models/male.obj', 0.022);
+    const male = await loadModel(`${REPO_BASE}/models/male.obj`, 0.022);
     if (male) {
       male.position.set(Math.random() * 4 - 2, 0, Math.random() * 4 - 2);
       male.rotation.y = Math.random() * Math.PI * 2;
     }
   },
   addFemale: async () => {
-    const female = await loadModel('/models/female.obj', 0.022);
+    const female = await loadModel(`${REPO_BASE}/models/female.obj`, 0.022);
     if (female) {
       female.position.set(Math.random() * 4 - 2, 0, Math.random() * 4 - 2);
       female.rotation.y = Math.random() * Math.PI * 2;
     }
   },
   addDuck: async () => {
-    const duck = await loadModel('/models/duck.obj', 0.015);
+    const duck = await loadModel(`${REPO_BASE}/models/duck.obj`, 0.015);
     if (duck) {
       duck.position.set(Math.random() * 4 - 2, 0, Math.random() * 4 - 2);
       duck.rotation.x = -Math.PI / 2;
@@ -181,30 +184,30 @@ let selectedObjectGui = null;
 // Add available textures mapping
 const availableTextures = {
     'None': null,
-    'Bricks': '/textures/extra/bricks.jpg',
-    'Grass': '/textures/extra/grass.jpg',
-    'Water': '/textures/extra/water.jpg',
-    'Wood': '/textures/extra/wood.jpg',
-    'Cat': '/textures/cat_diffuse.jpg',
-    'Duck': '/textures/duck_diffuse.jpg',
-    'Female': '/textures/female_diffuse.jpg',
-    'Male': '/textures/male_diffuse.jpg'
+    'Bricks': `${REPO_BASE}/textures/extra/bricks.jpg`,
+    'Grass': `${REPO_BASE}/textures/extra/grass.jpg`,
+    'Water': `${REPO_BASE}/textures/extra/water.jpg`,
+    'Wood': `${REPO_BASE}/textures/extra/wood.jpg`,
+    'Cat': `${REPO_BASE}/textures/cat_diffuse.jpg`,
+    'Duck': `${REPO_BASE}/textures/duck_diffuse.jpg`,
+    'Female': `${REPO_BASE}/textures/female_diffuse.jpg`,
+    'Male': `${REPO_BASE}/textures/male_diffuse.jpg`
 };
 
 // Add surface textures mapping
 const surfaceTextures = {
     'None': null,
-    'Bricks': '/textures/extra/bricks.jpg',
-    'Grass': '/textures/extra/grass.jpg',
-    'Water': '/textures/extra/water.jpg',
-    'Wood': '/textures/extra/wood.jpg'
+    'Bricks': `${REPO_BASE}/textures/extra/bricks.jpg`,
+    'Grass': `${REPO_BASE}/textures/extra/grass.jpg`,
+    'Water': `${REPO_BASE}/textures/extra/water.jpg`,
+    'Wood': `${REPO_BASE}/textures/extra/wood.jpg`
 };
 
 // Add scene textures mapping at the top with other texture mappings
 const sceneTextures = {
     'None': null,
-    'Sky': '/textures/scene/sky-scene.jpg',
-    'Space': '/textures/scene/space-scene.jpg'
+    'Sky': `${REPO_BASE}/textures/scene/sky-scene.jpg`,
+    'Space': `${REPO_BASE}/textures/scene/space-scene.jpg`
 };
 
 function updateObjectGUI(object) {
@@ -631,10 +634,10 @@ async function initializeScene() {
 
         // Load all models simultaneously
         const [cat, male, female, duck] = await Promise.all([
-            loadModel('/models/cat.obj', 0.03),
-            loadModel('/models/male.obj', 0.022),
-            loadModel('/models/female.obj', 0.022),
-            loadModel('/models/duck.obj', 0.015)
+            loadModel(`${REPO_BASE}/models/cat.obj`, 0.03),
+            loadModel(`${REPO_BASE}/models/male.obj`, 0.022),
+            loadModel(`${REPO_BASE}/models/female.obj`, 0.022),
+            loadModel(`${REPO_BASE}/models/duck.obj`, 0.015)
         ]);
 
         loadingProgress.textContent = 'Positioning Models...';
@@ -696,8 +699,8 @@ async function loadModel(modelPath, scale = 1) {
 
         // Apply materials and textures
         if (modelPath.includes('cat')) {
-            const catTexture = await textureLoader.loadAsync('/textures/cat_diffuse.jpg');
-            const catBumpMap = await textureLoader.loadAsync('/textures/cat_bump.jpg');
+            const catTexture = await textureLoader.loadAsync(`${REPO_BASE}/textures/cat_diffuse.jpg`);
+            const catBumpMap = await textureLoader.loadAsync(`${REPO_BASE}/textures/cat_bump.jpg`);
             
             model.traverse((child) => {
                 if (child.isMesh) {
@@ -713,7 +716,7 @@ async function loadModel(modelPath, scale = 1) {
                 }
             });
         } else if (modelPath.endsWith('duck.obj')) {
-            const duckTexture = await textureLoader.loadAsync('/textures/duck_diffuse.jpg');
+            const duckTexture = await textureLoader.loadAsync(`${REPO_BASE}/textures/duck_diffuse.jpg`);
             
             model.traverse((child) => {
                 if (child.isMesh) {
@@ -727,8 +730,8 @@ async function loadModel(modelPath, scale = 1) {
                 }
             });
         } else if (modelPath.endsWith('female.obj')) {
-            const femaleTexture = await textureLoader.loadAsync('/textures/female_diffuse.jpg');
-            const femaleNormalMap = await textureLoader.loadAsync('/textures/female_normal.jpg');
+            const femaleTexture = await textureLoader.loadAsync(`${REPO_BASE}/textures/female_diffuse.jpg`);
+            const femaleNormalMap = await textureLoader.loadAsync(`${REPO_BASE}/textures/female_normal.jpg`);
             
             model.traverse((child) => {
                 if (child.isMesh) {
@@ -744,8 +747,8 @@ async function loadModel(modelPath, scale = 1) {
                 }
             });
         } else if (modelPath.endsWith('male.obj')) {
-            const maleTexture = await textureLoader.loadAsync('/textures/male_diffuse.jpg');
-            const maleNormalMap = await textureLoader.loadAsync('/textures/male_normal.jpg');
+            const maleTexture = await textureLoader.loadAsync(`${REPO_BASE}/textures/male_diffuse.jpg`);
+            const maleNormalMap = await textureLoader.loadAsync(`${REPO_BASE}/textures/male_normal.jpg`);
             
             model.traverse((child) => {
                 if (child.isMesh) {
